@@ -1,2 +1,2 @@
 mutable_string = 'www.my_site.com#about'
-print(mutable_string)
+print(mutable_string.replace('#', '/'))

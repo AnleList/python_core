@@ -1,4 +1,4 @@
 full_name = 'Ivanou Ivan'
 
-last_name, first_name = full_name.split()
-print(f"{first_name} {last_name}")
+listed_full_name = full_name.split()
+print(f"{listed_full_name[1]} {listed_full_name[0]}")

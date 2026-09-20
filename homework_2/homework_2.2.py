@@ -5,3 +5,21 @@
 # успешной авторизации и прекратить работу, а после трех неправильных
 # попыток — сообщить о блокировке доступа.
 
+CORRECT_PASSWORD = "Python123"
+max_attempts = 3
+start_attempt = 1
+
+print("Добро пожаловать! Введите пароль для авторизации.")
+
+while start_attempt <= max_attempts:
+    user_password = input(f"Попытка {start_attempt}/{max_attempts}. Введите пароль: ")
+    start_attempt += 1
+
+    if user_password == CORRECT_PASSWORD:
+        print("Успешная авторизация!")
+        break
+    else:
+        if start_attempt < max_attempts:
+            print("Неверный пароль. Попробуйте ещё.")
+        else:
+            print("Доступ заблокирован: превышено количество попыток.")

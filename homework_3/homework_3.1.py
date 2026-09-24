@@ -13,3 +13,33 @@
 # SKIP: 1
 # Успешно: 50.0%
 
+def get_test_statistics(results):
+
+    added_stats = {'PASS': 0, 'FAIL': 0, 'SKIP': 0}
+
+    for status in results:
+        if status == 'PASS':
+            added_stats['PASS'] += 1
+        elif status == 'FAIL':
+            added_stats['FAIL'] += 1
+        elif status == 'SKIP':
+            added_stats['SKIP'] += 1
+
+    return added_stats
+
+input_line = input("Введите результаты тестов через пробел, пример ввода:\n>PASS FAIL SKIP\n>")
+results_list = input_line.upper().split()
+
+stats = get_test_statistics(results_list)
+
+total_tests = stats['PASS'] + stats['FAIL'] + stats['SKIP']
+
+if total_tests > 0:
+    success_percent = (stats['PASS'] / total_tests) * 100
+    print(f"Всего тестов: {total_tests}")
+    print(f"PASS: {stats['PASS']}")
+    print(f"FAIL: {stats['FAIL']}")
+    print(f"SKIP: {stats['SKIP']}")
+    print(f"Успешно: {success_percent:.1f}%")
+else:
+    print("Нет корректно введённых результатов")

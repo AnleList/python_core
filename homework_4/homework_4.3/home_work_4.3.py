@@ -6,29 +6,31 @@ import string
 with open('file.txt', 'r+') as file:
     content = file.read()
 
+
     def split_with_delimiters(text):
         parts = []
         current_word = ''
         current_delimiter = ''
 
         for char in text:
-            if char in string.whitespace:
-                if current_word:
-                    parts.append(('word', current_word))
-                    current_word = ''
-                current_delimiter += char
-            else:
-                if current_delimiter:
-                    parts.append(('delimiter', current_delimiter))
-                    current_delimiter = ''
-                current_word += char
-        # после выхода из цикла надо сохранить последние полученные элементы в наш словарь parts
+            if char in string.whitespace:  # если символ является делителем
+                if current_word:  # и слово не пусто
+                    parts.append(('word', current_word))  # кладём наше слово в словарь
+                    current_word = ''  # слово сохранено в словарь - переменную очищаем
+                current_delimiter += char  # сивол (делитель) сохраняем/добавляем как продолжение в переменную в любом случае
+            else:  # если символ не является делителем, т е является частью слова
+                if current_delimiter:  # и делитель уже есть
+                    parts.append(('delimiter', current_delimiter))  # кладём наш делитель в словарь
+                    current_delimiter = ''  # делитель сохранён в словарь - переменную очищаем
+                current_word += char  # сивол, как часть слова, сохраняем в переменную в любом случае
+        # после выхода из цикла надо сохранить последние полученные элементы в наш словарь
         if current_word:
             parts.append(('word', current_word))
         if current_delimiter:
             parts.append('delimiter', current_delimiter)
 
         return parts
+
 
     typified_parts = split_with_delimiters(content)
 

@@ -4,7 +4,6 @@
 # отсутствуют, то соответствующий результирующий файл оставить пустым.
 
 with open('file.txt', 'r') as input_file:
-
     even_file = open('even_numbers.txt', 'w')
     odd_file = open('odd_numbers.txt', 'w')
 

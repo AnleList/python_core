@@ -11,7 +11,6 @@ import random
 
 
 def retry(count):
-
     def decorator(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
@@ -24,13 +23,15 @@ def retry(count):
                     return True
             print("Все попытки исчерпаны.")
             return False
+
         return wrapper
 
     return decorator
 
+
 @retry(4)
-def check_connection(rate_limit = 5):
-    fact_rate = random.randint(1, int(rate_limit*1.8))
+def check_connection(rate_limit=5):
+    fact_rate = random.randint(1, int(rate_limit * 1.8))
     print(f"факт время соединения: {fact_rate}")
     if fact_rate < 5:
         print(" - соединение установлено за установленное время!")

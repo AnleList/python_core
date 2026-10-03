@@ -9,6 +9,7 @@
 
 import functools
 
+
 def log_test(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
@@ -16,6 +17,7 @@ def log_test(func):
         result = func(*args, **kwargs)
         print(f"Тест {func.__name__} завершён. Результат: {result}\n")
         return result
+
     return wrapper
 
 
@@ -23,13 +25,16 @@ def log_test(func):
 def add_numbers(a, b):
     return a + b
 
+
 @log_test
 def multiply_and_subtract(x, y, subtract=0):
     return x * y - subtract
 
+
 @log_test
 def simple_test():
     return "Успех!"
+
 
 # Тестируем декоратор:
 add_numbers(5, 3)

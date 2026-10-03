@@ -6,8 +6,8 @@
 
 test_results = ['PASS', 'FAIL', 'PASS', 'SKIP', 'PASS']
 
-def count_pass_tests(in_def_test_results):
 
+def count_pass_tests(in_def_test_results):
     # условие выхода из рекурсии:
     if not in_def_test_results:
         return 0
@@ -16,5 +16,6 @@ def count_pass_tests(in_def_test_results):
         return 1 + count_pass_tests(in_def_test_results[1:len(in_def_test_results)])
     else:
         return count_pass_tests(in_def_test_results[1:len(in_def_test_results)])
+
 
 print(f"Количество тестов со статусом PASS: {count_pass_tests(test_results)}")

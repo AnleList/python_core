@@ -27,7 +27,7 @@ with open('file.txt', 'r+') as file:
         if current_word:
             parts.append(('word', current_word))
         if current_delimiter:
-            parts.append('delimiter', current_delimiter)
+            parts.append(('delimiter', current_delimiter))
 
         return parts
 

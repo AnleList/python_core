@@ -22,6 +22,7 @@ class ATM:
 
     def add_money(self, bills_20=0, bills_50=0, bills_100=0):
 
+        print("\nДобавляем деньги:")
         self.bills_20 += bills_20
         self.bills_50 += bills_50
         self.bills_100 += bills_100
@@ -29,58 +30,43 @@ class ATM:
 
     def withdraw(self, amount: int):
 
-        temp_20, temp_50, temp_100 = self.bills_20, self.bills_50, self.bills_100
-        inserted_20 = inserted_50 = inserted_100 = 0
+        best_combination = None
 
-        # Сначала пытаемся выдать купюрами 100
-        while temp_100 > 0 and amount >= 100:
-            temp_100 -= 1
-            inserted_100 += 1
-            amount -= 100
+        for count_100 in range(self.bills_100, -1, -1):
+            for count_50 in range(self.bills_50, -1, -1):
+                for count_20 in range(self.bills_20, -1, -1):
+                    total = count_100 * 100 + count_50 * 50 + count_20 * 20
+                    if total == amount:
+                        best_combination = (count_20, count_50, count_100)
+                        break
+                    elif total > amount:
+                        continue
+                if best_combination:
+                    break
+            if best_combination:
+                break
 
-        # Затем купюрами 50
-        while temp_50 > 0 and amount >= 50:
-            temp_50 -= 1
-            inserted_50 += 1
-            amount -= 50
+        if best_combination:
+            count_20, count_50, count_100 = best_combination
+            self.bills_20 -= count_20
+            self.bills_50 -= count_50
+            self.bills_100 -= count_100
 
-        # Наконец купюрами 20
-        while temp_20 > 0 and amount >= 20:
-            temp_20 -= 1
-            inserted_20 += 1
-            amount -= 20
-
-        # Если после всех попыток сумма не обнулилась — операция невозможна
-        if amount != 0:
-            print(f"Невозможно выдать сумму {amount + inserted_20 * 20 + inserted_50 * 50 + inserted_100 * 100}")
+            print(f"Выдано: {count_20}×20, {count_50}×50, {count_100}×100")
+            return True
+        else:
+            print(f"Невозможно выдать сумму {amount}")
             return False
 
-        # Если всё получилось, обновляем реальное состояние банкомата
-        self.bills_20 = temp_20
-        self.bills_50 = temp_50
-        self.bills_100 = temp_100
 
-        # Выводим информацию о выданных купюрах
-        print(f"Выдано: {inserted_20}×20, {inserted_50}×50, {inserted_100}×100")
-        return True
-
-
-# Создаём объект ATM с начальным количеством купюр
 atm = ATM(bills_20=10, bills_50=5, bills_100=3)
 
-# Добавляем ещё купюр
-print("\nДобавляем деньги:")
 atm.add_money(bills_20=5, bills_50=3, bills_100=2)
 
-# Выполняем операции снятия:
-print("\nОперация 1: снятие 250")
-success1 = atm.withdraw(250)
-
-print("\nОперация 2: снятие 120")
-success2 = atm.withdraw(120)
-
-print("\nОперация 3: снятие 500 (невозможно)")
-success3 = atm.withdraw(500)
-
-print("\nОперация 4: снятие 80")
-success4 = atm.withdraw(80)
+sums = (120, 250, 160, 80, 1000)
+for i, summ in enumerate(sums, 1):
+    print(f"\nОперация {i}: снятие {summ}")
+    if atm.withdraw(summ):
+        print("операция выполнена")
+    else:
+        print("отказ")

@@ -144,4 +144,3 @@ if bouquet.has_flower_by_name(check_name):
     print(f"{check_name} есть в букете.")
 else:
     print(f"{check_name} нет в букете.")
-

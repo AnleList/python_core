@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Test Login Functionality",
+    "status": "PASS",
+    "duration": 2.5
+  },
+  {
+    "name": "Test Payment Processing",
+    "status": "FAIL",
+    "duration": 5.8
+  },
+  {
+    "name": "Test User Profile Update",
+    "status": "SKIP",
+    "duration": 1.2
+  },
+  {
+    "name": "Test Data Export",
+    "status": "PASS",
+    "duration": 3.1
+  },
+  {
+    "name": "Test Report Generation",
+    "status": "FAIL",
+    "duration": 8.7
+  }
+]
